@@ -25,15 +25,21 @@ from .time_util import sleep
 
 
 def get_geckodriver():
+    print('getting geckodriver')
     # prefer using geckodriver from path
     gecko_path = shutil.which("geckodriver") or shutil.which("geckodriver.exe")
     if gecko_path:
         return gecko_path
+    print('gecko path', gecko_path)
 
     asset_path = use_assets()
+    print('asset path', asset_path)
     gdd = GeckoDriverDownloader(asset_path, asset_path)
+    print('gdd', gdd)
     # skips download if already downloaded
     bin_path, sym_path = gdd.download_and_install()
+    print('bin path', bin_path)
+    print('sym_path', sym_path)
     return sym_path
 
 
@@ -64,7 +70,7 @@ def set_selenium_local_session(
 ):
     """Starts local session for a selenium server.
     Default case scenario."""
-
+    print('set_selenium_local_session', geckodriver_path)
     browser = None
     err_msg = ""
 
